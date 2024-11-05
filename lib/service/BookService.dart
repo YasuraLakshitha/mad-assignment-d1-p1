@@ -9,7 +9,7 @@ class BookService{
     return repository.save(book);
   }
 
-  Book removeBookById(String value){
-
+  bool removeBookById(String value){
+    return repository.remove(value);
   }
 }
