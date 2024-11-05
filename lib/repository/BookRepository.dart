@@ -11,10 +11,9 @@ class BookRepository {
   }
 
   bool remove(String value) {
-    if(value.isEmpty)throw Exception("ISBN number cannot be null");
-    Book? book =
-        bookList.firstWhere((book) => value == book.isbn, orElse: null);
-    return book != null ? bookList.remove(book) : false;
+    Book? book = bookList.firstWhere((book) => value == book.isbn,
+        orElse: () => new Book('', '', '', false));
+    return book.isbn.isNotEmpty ? bookList.remove(book) : false;
   }
 
   List<Book> findAll() {

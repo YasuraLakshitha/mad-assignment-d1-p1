@@ -10,7 +10,12 @@ class BookService {
   }
 
   bool removeBookById(String value) {
-    return repository.remove(value);
+
+    if (value.isEmpty) throw Exception("ISBN number cannot be null");
+
+    bool isRemoved = repository.remove(value);
+    if (isRemoved) return true;
+    throw Exception("No such book found");
   }
 
   List<Book> retriveAllBooks() {

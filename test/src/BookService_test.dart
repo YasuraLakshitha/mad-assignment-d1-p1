@@ -33,10 +33,12 @@ void main() {
     });
 
     test("test when null value passed to remove book method", () {
-      expect(() => service.removeBookById(""),throwsException);
+      expect(() => service.removeBookById(""), throwsException);
+    });
+
+    test("test when wrong ISBN number passed to remove method", () {
+      String bookId = "000";
+      expect(() => service.removeBookById(bookId), throwsException);
     });
   });
 }
-
-//todo: negative usecases => check null values for [save_book,remove_book];
-//todo: negative usecases => check null values returns from find_all;
