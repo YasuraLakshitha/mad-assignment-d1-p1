@@ -2,18 +2,18 @@ import 'package:library_management_system/repository/BookRepository.dart';
 
 import '../model/Book.dart';
 
-class BookService{
+class BookService {
   BookRepository repository = new BookRepository();
 
-  Book saveBook(Book book){
+  Book saveBook(Book book) {
     return repository.save(book);
   }
 
-  bool removeBookById(String value){
+  bool removeBookById(String value) {
     return repository.remove(value);
   }
 
-  List<Book> retriveAllBooks(){
+  List<Book> retriveAllBooks() {
     return repository.findAll();
   }
 }
