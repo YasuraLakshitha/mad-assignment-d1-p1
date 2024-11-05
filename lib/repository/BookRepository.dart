@@ -7,4 +7,12 @@ class BookRepository {
     bookList.add(book);
     return book;
   }
+
+  bool remove(String value) {
+    Book? book = bookList.firstWhere((book) => book.isbn == value);
+    if (book != null) {
+      return bookList.remove(book);
+    }
+    return false;
+  }
 }

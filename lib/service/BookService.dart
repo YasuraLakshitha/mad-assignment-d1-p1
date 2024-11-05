@@ -8,4 +8,8 @@ class BookService{
   Book saveBook(Book book){
     return repository.save(book);
   }
+
+  Book removeBookById(String value){
+
+  }
 }
