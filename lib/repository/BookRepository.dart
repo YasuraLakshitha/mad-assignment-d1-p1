@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
 import '../model/Book.dart';
 
 class BookRepository {
-  final List<Book> bookList = [];
+  final Set<Book> bookList = {};
 
   Book save(Book book) {
     bookList.add(book);
@@ -14,5 +16,9 @@ class BookRepository {
       return bookList.remove(book);
     }
     return false;
+  }
+
+  List<Book> findAll() {
+    return bookList.toList();
   }
 }

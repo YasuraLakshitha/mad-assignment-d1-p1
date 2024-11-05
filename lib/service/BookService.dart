@@ -12,4 +12,8 @@ class BookService{
   bool removeBookById(String value){
     return repository.remove(value);
   }
+
+  List<Book> retriveAllBooks(){
+    return repository.findAll();
+  }
 }

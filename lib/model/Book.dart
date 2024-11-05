@@ -37,4 +37,12 @@ class Book {
   String toString() {
     return 'Book{_title: $_title, _author: $_author, _isbn: $_isbn, _isUnavailable: $_isUnavailable}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Book && runtimeType == other.runtimeType && _isbn == other._isbn;
+
+  @override
+  int get hashCode => _isbn.hashCode;
 }
