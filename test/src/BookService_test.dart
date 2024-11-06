@@ -3,6 +3,7 @@ import 'package:library_management_system/model/Book.dart';
 import 'package:library_management_system/service/BookService.dart';
 
 void main() {
+  //Initial values
   late BookService service;
   late Book book;
 
@@ -17,10 +18,13 @@ void main() {
     book = Book(_title, _author, _isbn, _isUnavailable);
   });
 
+  //Testing createBook
   group("BookService_unit_test - createBook method", () {
     test("should return created book when create book method called", () {
+      //Arrange
       service.saveBook(book);
 
+      //Assertions
       expect(service.retrieveAllBooks().length, equals(1));
       expect(service.retrieveAllBooks()[0].title, equals(_title));
       expect(service.retrieveAllBooks()[0].author, equals(_author));
@@ -30,13 +34,16 @@ void main() {
     });
   });
 
+  //Testing removeById
   group("BookService_unit_test - removeById method", () {
     test("should return true when remove book method called", () {
+      //Arrange
       const String bookId = "B001";
 
       service.saveBook(book);
       bool isRemoved = service.removeBookById(bookId);
 
+      //Assertions
       expect(isRemoved, true);
     });
 
@@ -56,10 +63,8 @@ void main() {
     });
   });
 
+  //Testing updateStatus
   group("BookService_unit_test - updateStatus method", () {
-    //todo: update status
-    //todo: empty ISBN passed
-
     late Book savedBook;
     late bool preStatus;
 
@@ -69,9 +74,11 @@ void main() {
     });
 
     test("should return updated book with changed status", () {
+      //Arrange
       Book updatedBook =
           service.updateStatus(savedBook.isbn, !savedBook.isUnavailable);
 
+      //Assertions
       expect(updatedBook.isbn.isNotEmpty, isTrue, reason: "ISBN is empty.");
 
       expect(updatedBook.isbn, equals(savedBook.isbn),
@@ -83,8 +90,10 @@ void main() {
 
     test("should throw an exception when empty value passed to ISBN number",
         () {
+      //Arrange
       const String isbn = '';
 
+      //Assertions
       expect(() => service.updateStatus(isbn, false), throwsException);
     });
   });
