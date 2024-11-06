@@ -33,5 +33,23 @@ void main() {
       String emptyValue = "";
       expect(() => filterService.retrieveByTitle(emptyValue), throwsException);
     });
+
+    group("FilterService_unit_test - filterByAuthor method", () {
+      test("should return list of books contain Author1", () {
+        String value = "Author1";
+        Set<Book> bookSet = filterService.retrieveByTitle(value);
+
+        expect(bookSet, isA<Set<Book>>());
+        expect(bookSet.every((element) => element.title == value), isTrue,
+            reason: "All books should contain author name as `$value`");
+      });
+
+      test("should throw an exception when empty value passed as arguments",
+          () {
+        String emptyValue = "";
+        expect(
+            () => filterService.retrieveByTitle(emptyValue), throwsException);
+      });
+    });
   });
 }
