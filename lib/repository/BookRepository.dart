@@ -26,7 +26,7 @@ class BookRepository {
       throw Exception("No such book found");
     }
 
-   book.isUnavailable = status;
+    book.isUnavailable = status;
 
     return book;
   }
@@ -37,4 +37,10 @@ class BookRepository {
 
     return book;
   }
+
+  Set<Book> filterByTitle(String value) {
+    return bookList.where((test) => test.title == value).toSet();
+  }
+
+
 }
