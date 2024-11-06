@@ -3,42 +3,89 @@ import 'package:library_management_system/model/Book.dart';
 import 'package:library_management_system/service/BookService.dart';
 
 void main() {
-  group("BookService_unit_test", () {
-    BookService service = new BookService();
+  late BookService service;
+  late Book book;
 
-    test("test when create book method called", () {
-      const String _title = "TestBook1";
-      const String _author = "Author1";
-      const String _isbn = "B001";
-      const bool _isUnavailable = false;
+  const String _title = "TestBook1";
+  const String _author = "Author1";
+  const String _isbn = "B001";
+  const bool _isUnavailable = false;
 
-      Book book = new Book(_title, _author, _isbn, _isUnavailable);
+  setUp(() {
+    service = BookService();
 
+    book = Book(_title, _author, _isbn, _isUnavailable);
+  });
+
+  group("BookService_unit_test - createBook method", () {
+    test("should return created book when create book method called", () {
       service.saveBook(book);
 
-      expect(service.retriveAllBooks().length, equals(1));
-      expect(service.retriveAllBooks()[0].title, equals(_title));
-      expect(service.retriveAllBooks()[0].author, equals(_author));
-      expect(service.retriveAllBooks()[0].isbn, equals(_isbn));
+      expect(service.retrieveAllBooks().length, equals(1));
+      expect(service.retrieveAllBooks()[0].title, equals(_title));
+      expect(service.retrieveAllBooks()[0].author, equals(_author));
+      expect(service.retrieveAllBooks()[0].isbn, equals(_isbn));
       expect(
-          service.retriveAllBooks()[0].isUnavailable, equals(_isUnavailable));
+          service.retrieveAllBooks()[0].isUnavailable, equals(_isUnavailable));
     });
+  });
 
-    test("test when remove book method called", () {
+  group("BookService_unit_test - removeById method", () {
+    test("should return true when remove book method called", () {
       const String bookId = "B001";
 
+      service.saveBook(book);
       bool isRemoved = service.removeBookById(bookId);
 
       expect(isRemoved, true);
     });
 
-    test("test when null value passed to remove book method", () {
-      expect(() => service.removeBookById(""), throwsException);
+    test(
+        "should throw an exception when null value passed to remove book method",
+        () {
+      expect(() => service.removeBookById(""), throwsException,
+          reason: 'ISBN number is empty');
     });
 
-    test("test when wrong ISBN number passed to remove method", () {
+    test(
+        "should throw an exception when incorrect ISBN number passed to remove method",
+        () {
       String bookId = "000";
-      expect(() => service.removeBookById(bookId), throwsException);
+      expect(() => service.removeBookById(bookId), throwsException,
+          reason: "ISBN number is not exists.");
+    });
+  });
+
+  group("BookService_unit_test - updateStatus method", () {
+    //todo: update status
+    //todo: empty ISBN passed
+
+    late Book savedBook;
+    late bool preStatus;
+
+    setUp(() {
+      savedBook = service.saveBook(book);
+      preStatus = savedBook.isUnavailable;
+    });
+
+    test("should return updated book with changed status", () {
+      Book updatedBook =
+          service.updateStatus(savedBook.isbn, !savedBook.isUnavailable);
+
+      expect(updatedBook.isbn.isNotEmpty, isTrue, reason: "ISBN is empty.");
+
+      expect(updatedBook.isbn, equals(savedBook.isbn),
+          reason: "ISBN numbers didn't match.");
+
+      expect(updatedBook.isUnavailable, !preStatus,
+          reason: "Status is not changed");
+    });
+
+    test("should throw an exception when empty value passed to ISBN number",
+        () {
+      const String isbn = '';
+
+      expect(() => service.updateStatus(isbn, false), throwsException);
     });
   });
 }

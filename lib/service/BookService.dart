@@ -3,7 +3,7 @@ import 'package:library_management_system/repository/BookRepository.dart';
 import '../model/Book.dart';
 
 class BookService {
-  BookRepository repository = new BookRepository();
+  BookRepository repository = BookRepository();
 
   Book saveBook(Book book) {
     return repository.save(book);
@@ -20,7 +20,14 @@ class BookService {
     throw Exception("No such book found");
   }
 
-  List<Book> retriveAllBooks() {
+  List<Book> retrieveAllBooks() {
     return repository.findAll();
+  }
+
+  Book updateStatus(String isbn,bool status){
+    if (isbn.isEmpty) {
+      throw Exception("ISBN number cannot be empty");
+    }
+    return repository.updateStatus(isbn, status);
   }
 }
