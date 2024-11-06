@@ -79,5 +79,5 @@ void main() {
             reason: "All books should contain isUnavailable as `$value`");
       });
     });
-  :});
+  });
 }
