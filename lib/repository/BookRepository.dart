@@ -39,8 +39,8 @@ class BookRepository {
   }
 
   Set<Book> filterByTitle(String value) {
-    return bookList.where((test) => test.title == value).toSet();
+    return bookList
+        .where((test) => test.title.toLowerCase() == value.toLowerCase())
+        .toSet();
   }
-
-
 }
