@@ -52,4 +52,20 @@ void main() {
       });
     });
   });
+
+  group("FilterService_unit_test - filterByAuthor method", () {
+    test("should return list of books contain Author", () {
+      String value = "Author";
+      Set<Book> bookSet = filterService.retrieveByAuthor(value);
+
+      expect(bookSet, isA<Set<Book>>());
+      expect(bookSet.every((element) => element.author == value), isTrue,
+          reason: "All books should contain Author name as `$value`");
+    });
+
+    test("should throw an exception when empty value passed", () {
+      String emptyValue = "";
+      expect(() => filterService.retrieveByAuthor(emptyValue), throwsException);
+    });
+  });
 }

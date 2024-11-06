@@ -15,4 +15,11 @@ class FilterService {
     }
     return repository.filterByTitle(value);
   }
+
+  Set<Book> retrieveByAuthor(String value) {
+    if (value.isEmpty) {
+      throw Exception('Author should not be empty');
+    }
+    return repository.filterByAuthor(value);
+  }
 }
