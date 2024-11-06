@@ -49,4 +49,8 @@ class BookRepository {
         .where((test) => test.author.toLowerCase() == value.toLowerCase())
         .toSet();
   }
+
+  Set<Book> filterByStatus(bool value) {
+    return bookList.where((test) => test.isUnavailable == value).toSet();
+  }
 }

@@ -67,5 +67,17 @@ void main() {
       String emptyValue = "";
       expect(() => filterService.retrieveByAuthor(emptyValue), throwsException);
     });
-  });
+
+    group("FilterService_unit_test - filterByStatus method", () {
+      test("should return list of books contain isUnavailable false", () {
+        bool value = false;
+        Set<Book> bookSet = filterService.retrieveByStatus(value);
+
+        expect(bookSet, isA<Set<Book>>());
+        expect(
+            bookSet.every((element) => element.isUnavailable == value), isTrue,
+            reason: "All books should contain isUnavailable as `$value`");
+      });
+    });
+  :});
 }

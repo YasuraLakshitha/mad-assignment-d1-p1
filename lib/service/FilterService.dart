@@ -22,4 +22,9 @@ class FilterService {
     }
     return repository.filterByAuthor(value);
   }
+
+  Set<Book> retrieveByStatus(bool value) {
+    return repository.filterByStatus(value);
+  }
+
 }
