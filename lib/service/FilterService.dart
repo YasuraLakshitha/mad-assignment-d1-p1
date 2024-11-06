@@ -3,7 +3,6 @@ import 'package:library_management_system/repository/BookRepository.dart';
 import '../model/Book.dart';
 
 class FilterService {
-  //todo: filter by title.
   //todo: filter by author.
   //todo: filter by status.
 

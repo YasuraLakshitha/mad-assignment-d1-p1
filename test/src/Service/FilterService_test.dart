@@ -5,21 +5,21 @@ import 'package:library_management_system/service/BookService.dart';
 import 'package:library_management_system/service/FilterService.dart';
 
 void main() {
+  late FilterService filterService;
+  late BookService bookService;
+
+  setUp(() {
+    filterService = FilterService();
+    bookService = BookService();
+
+    bookService.saveBook(Book("Title1", "Author1", "B002", false));
+    bookService.saveBook(Book("Title2", "Author1", "B003", false));
+    bookService.saveBook(Book("Title1", "Author2", "B004", true));
+    bookService.saveBook(Book("Title1", "Author2", "B005", false));
+    bookService.saveBook(Book("Title2", "Author1", "B006", true));
+  });
+
   group("FilterService_unit_test - filterByTitle method", () {
-    late FilterService filterService;
-    late BookService bookService;
-
-    setUp(() {
-      filterService = FilterService();
-      bookService = BookService();
-
-      bookService.saveBook(Book("Title1", "Author1", "B002", false));
-      bookService.saveBook(Book("Title2", "Author1", "B003", false));
-      bookService.saveBook(Book("Title1", "Author2", "B004", true));
-      bookService.saveBook(Book("Title1", "Author2", "B005", false));
-      bookService.saveBook(Book("Title2", "Author1", "B006", true));
-    });
-
     test("should return list of books contain Title1", () {
       String value = "Title1";
       Set<Book> bookSet = filterService.retrieveByTitle(value);
@@ -31,8 +31,7 @@ void main() {
 
     test("should throw an exception when empty value passed", () {
       String emptyValue = "";
-      expect(() => filterService.retrieveByTitle(emptyValue), throwsExceptionad
-      );
+      expect(() => filterService.retrieveByTitle(emptyValue), throwsException);
     });
   });
 }

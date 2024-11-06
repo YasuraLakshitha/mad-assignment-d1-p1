@@ -43,4 +43,10 @@ class BookRepository {
         .where((test) => test.title.toLowerCase() == value.toLowerCase())
         .toSet();
   }
+
+  Set<Book> filterByAuthor(String value) {
+    return bookList
+        .where((test) => test.author.toLowerCase() == value.toLowerCase())
+        .toSet();
+  }
 }
