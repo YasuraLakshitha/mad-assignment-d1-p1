@@ -29,4 +29,8 @@ class BookService {
     }
     return _repository.updateStatus(isbn, status);
   }
+
+  Book findById(String isbn) {
+    return _repository.findById(isbn);
+  }
 }

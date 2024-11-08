@@ -6,7 +6,11 @@ void main() {
   final CommandLineRunner runner = CommandLineRunner();
 
   while (true) {
-    stdout.write('Enter option\n 1 -> add new book\n 2 -> search books\n-1 -> end\n');
+    stdout.write('Enter option\n '
+        '\t 1 -> add new book\n '
+        '\t 2 -> search books\n'
+        '\t 3 -> update book status\n'
+        '\t-1 -> exit\n');
     int option = int.parse(stdin.readLineSync()!);
 
     switch (option) {
@@ -16,6 +20,11 @@ void main() {
 
       case 2:
         runner.search();
+        break;
+
+      case 3:
+        runner.update();
+        break;
 
       case -1:
         exit(0);

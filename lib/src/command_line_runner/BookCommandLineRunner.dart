@@ -24,7 +24,7 @@ class CommandLineRunner {
 
     _service.saveBook(book);
 
-    stdout.write("\n\tBook added successfully\n");
+    stdout.write("\n\tBook added successfully...\n\n");
   }
 
   void search() {
@@ -38,10 +38,23 @@ class CommandLineRunner {
     //todo: handle when author name == title name
 
     if (result.first.isbn.isNotEmpty) {
-      stdout.write(result);
+      stdout.writeln(result);
       return;
     }
 
-    stdout.write("No such book found\n\n");
+    stdout.write("\t\nNo such book found...\n\n");
+  }
+
+  void update() {
+    stdout.write("Enter book ISBN\t: ");
+    String isbn = stdin.readLineSync()!;
+
+    stdout.write(
+        "Update book status\n\t1-Unavailable\n\t2-Available\nEnter your option\t: ");
+    bool status = stdin.readLineSync()!.contains("1") ? false : true;
+
+    _service.updateStatus(isbn, status);
+
+    stdout.write("\n\tBook updated successfully...\n\n");
   }
 }
