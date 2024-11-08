@@ -23,10 +23,12 @@ class CommandLineRunner {
     Book book = Book(title!, author!, ISBN!, false);
 
     _service.saveBook(book);
+
+    stdout.write("\n\tBook added successfully\n");
   }
 
   void search() {
-    stdout.write("Search book\n\tEnter book ISBN or author or title\t: ");
+    stdout.write("Search book\n\tEnter author or title\t: ");
     String value = stdin.readLineSync()!;
 
     Set<Book> result = _filter.retrieveByAuthor(value).isEmpty
@@ -35,11 +37,11 @@ class CommandLineRunner {
 
     //todo: handle when author name == title name
 
-    if (result.isNotEmpty) {
-      stdout.writeAll(result);
+    if (result.first.isbn.isNotEmpty) {
+      stdout.write(result);
       return;
     }
 
-    stdout.write("No such book found\n");
+    stdout.write("No such book found\n\n");
   }
 }

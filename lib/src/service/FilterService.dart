@@ -4,14 +4,14 @@ import '../model/Book.dart';
 
 class FilterService {
 
-  BookRepository repository = BookRepository();
+  final BookRepository _repository = BookRepository.instance;
 
   //filter by title
   Set<Book> retrieveByTitle(String value) {
     if (value.isEmpty) {
       throw Exception('Title should not be empty');
     }
-    return repository.filterByTitle(value);
+    return _repository.filterByTitle(value).toSet();
   }
 
   //filter by author
@@ -19,12 +19,12 @@ class FilterService {
     if (value.isEmpty) {
       throw Exception('Author should not be empty');
     }
-    return repository.filterByAuthor(value);
+    return _repository.filterByAuthor(value).toSet();
   }
 
   //filter by status
   Set<Book> retrieveByStatus(bool value) {
-    return repository.filterByStatus(value);
+    return _repository.filterByStatus(value);
   }
 
 }

@@ -1,22 +1,28 @@
-import 'dart:ffi';
+
 
 import '../model/Book.dart';
 
 class BookRepository {
-  final Set<Book> bookList = {};
+  final Set<Book> _bookList = {};
+
+  static final BookRepository _bookRepository = BookRepository._internal();
+
+  BookRepository._internal();
+
+  static get instance => _bookRepository;
 
   Book save(Book book) {
-    bookList.add(book);
+    _bookList.add(book);
     return book;
   }
 
   bool remove(String value) {
     Book book = findById(value);
-    return book.isbn.isNotEmpty ? bookList.remove(book) : false;
+    return book.isbn.isNotEmpty ? _bookList.remove(book) : false;
   }
 
   List<Book> findAll() {
-    return bookList.toList();
+    return _bookList.toList();
   }
 
   Book updateStatus(String isbn, bool status) {
@@ -32,25 +38,23 @@ class BookRepository {
   }
 
   Book findById(String isbn) {
-    Book book = bookList.firstWhere((element) => element.isbn == isbn,
+    Book book = _bookList.firstWhere((element) => element.isbn == isbn,
         orElse: () => Book('', '', '', false));
 
     return book;
   }
 
-  Set<Book> filterByTitle(String value) {
-    return bookList
-        .where((test) => test.title.toLowerCase() == value.toLowerCase())
-        .toSet();
+  Iterable<Book> filterByTitle(String value) {
+    return _bookList
+        .where((test) => test.title.toLowerCase().contains(value.toLowerCase()));
   }
 
-  Set<Book> filterByAuthor(String value) {
-    return bookList
-        .where((test) => test.author.toLowerCase() == value.toLowerCase())
-        .toSet();
+  Iterable<Book> filterByAuthor(String value) {
+    return _bookList
+        .where((test) => test.author.toLowerCase().contains(value.toLowerCase()));
   }
 
   Set<Book> filterByStatus(bool value) {
-    return bookList.where((test) => test.isUnavailable == value).toSet();
+    return _bookList.where((test) => test.isUnavailable == value).toSet();
   }
 }

@@ -9,15 +9,15 @@ void main() {
   late BookService service;
   late Book book;
 
-  const String _title = "TestBook1";
-  const String _author = "Author1";
-  const String _isbn = "B001";
-  const bool _isUnavailable = false;
+  const String title = "TestBook1";
+  const String author = "Author1";
+  const String isbn = "B001";
+  const bool isUnavailable = false;
 
   setUp(() {
     service = BookService();
 
-    book = Book(_title, _author, _isbn, _isUnavailable);
+    book = Book(title, author, isbn, isUnavailable);
   });
 
   //Testing createBook
@@ -28,11 +28,11 @@ void main() {
 
       //Assertions
       expect(service.retrieveAllBooks().length, equals(1));
-      expect(service.retrieveAllBooks()[0].title, equals(_title));
-      expect(service.retrieveAllBooks()[0].author, equals(_author));
-      expect(service.retrieveAllBooks()[0].isbn, equals(_isbn));
+      expect(service.retrieveAllBooks()[0].title, equals(title));
+      expect(service.retrieveAllBooks()[0].author, equals(author));
+      expect(service.retrieveAllBooks()[0].isbn, equals(isbn));
       expect(
-          service.retrieveAllBooks()[0].isUnavailable, equals(_isUnavailable));
+          service.retrieveAllBooks()[0].isUnavailable, equals(isUnavailable));
     });
   });
 
