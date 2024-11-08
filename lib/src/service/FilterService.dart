@@ -1,4 +1,4 @@
-import 'package:library_management_system/repository/BookRepository.dart';
+import 'package:library_management_system/src/repository/BookRepository.dart';
 
 import '../model/Book.dart';
 
