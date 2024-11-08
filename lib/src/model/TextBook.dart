@@ -5,9 +5,8 @@ class TextBook extends Book {
   String _subjectArea;
   String _gradeLevel;
 
-  TextBook(String _title, String _author, String _isbn, bool _isUnAvailable,
-      this._gradeLevel, this._subjectArea)
-      :super(_title, _author, _isbn, _isUnAvailable);
+  TextBook(super._title, super._author, super._isbn, super._isUnAvailable,
+      this._gradeLevel, this._subjectArea);
 
   String get gradeLevel => _gradeLevel;
 
@@ -20,4 +19,5 @@ class TextBook extends Book {
   set subjectArea(String value) {
     _subjectArea = value;
   }
+
 }

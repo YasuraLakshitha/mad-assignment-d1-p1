@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:library_management_system/model/Book.dart';
-import 'package:library_management_system/repository/BookRepository.dart';
-import 'package:library_management_system/service/BookService.dart';
-import 'package:library_management_system/service/FilterService.dart';
+import 'package:library_management_system/src/model/Book.dart';
+import 'package:library_management_system/src/repository/BookRepository.dart';
+import 'package:library_management_system/src/service/BookService.dart';
+import 'package:library_management_system/src/service/FilterService.dart';
 
 void main() {
   late FilterService filterService;

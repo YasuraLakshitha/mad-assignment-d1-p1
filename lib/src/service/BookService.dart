@@ -1,4 +1,4 @@
-import 'package:library_management_system/repository/BookRepository.dart';
+import 'package:library_management_system/src/repository/BookRepository.dart';
 
 import '../model/Book.dart';
 
@@ -10,7 +10,6 @@ class BookService {
   }
 
   bool removeBookById(String value) {
-
     if (value.isEmpty) throw Exception("ISBN number cannot be null");
 
     bool isRemoved = repository.remove(value);
@@ -24,7 +23,7 @@ class BookService {
     return repository.findAll();
   }
 
-  Book updateStatus(String isbn,bool status){
+  Book updateStatus(String isbn, bool status) {
     if (isbn.isEmpty) {
       throw Exception("ISBN number cannot be empty");
     }
